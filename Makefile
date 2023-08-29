@@ -11,26 +11,27 @@
 # **************************************************************************** #
 
 #Flags para compilar
-gcc src/fractol.c -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit 
+# gcc src/fractol.c -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit 
 
 ########################## VARIABLES DEFINITIONS ###############################
-NAME: fractol
+NAME = fractol
+MAKE = make --no-print-directory
 HEADER = fractol.h
 SRC = src/fractol.c
 DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
 PRINTF = $(DIR_PRINTF)/libftprintf.a
+CC = gcc
+CFLAGS += -Wextra -Werror -Wall -I deps/mlx -I inc -g
 
-CFLAGS += -Wextra -Werror -Wall -Imlx -g
 # This line itself doesn't actually generate the object files; it just sets up the 
 # names that will be used when the object files are generated
-# OBJ = $(SRC:.c=.o)
-CC = gcc
-MAKE = make --no-print-directory
+OBJ = $(SRC:.c=.o)
 
 ################################# RULES ####################################### 
-all: LIBFT FTPRINTF CLIENT SERVER
+all:
+	$(MAKE) $(NAME)
 # This pattern rule tells make how to build a .o file from a corresponding .c file 
 # (and ensures that the object files are recompiled if the header file, indicated 
 # by $(HEADER), changes). It specifies that the command $(CC) $(CFLAGS) -c $< -o $@ 
@@ -41,11 +42,11 @@ all: LIBFT FTPRINTF CLIENT SERVER
 # $(CC) $(CFLAGS) -c $< -o $@: This is the command that actually compiles each .c 
 # file into an .o file. $< is the first dependency (the .c file in this case) and $@ 
 # is the target (the .o file).
-# %.o : %.c $(HEADER)
-#	$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.c $(HEADER) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 # -C <path> option. This changes the current path to the path '<path>', -s silent
 LIBFT:
