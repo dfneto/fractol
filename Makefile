@@ -3,15 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davifern <davifern@student.42barcel>       +#+  +:+       +#+         #
+#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/08/17 13:19:00 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/07 18:33:45 by david            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#Flags para compilar
-# gcc src/fractol.c -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit 
 
 ########################## VARIABLES DEFINITIONS ###############################
 NAME = fractol
@@ -23,7 +20,7 @@ LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
 PRINTF = $(DIR_PRINTF)/libftprintf.a
 CC = gcc
-CFLAGS += -Wextra -Werror -Wall -I deps/mlx -I inc -g
+CFLAGS += -Wextra -Werror -Wall -I deps/mlx -I deps/ft_printf -g
 
 # This line itself doesn't actually generate the object files; it just sets up the 
 # names that will be used when the object files are generated
@@ -46,7 +43,9 @@ all:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
+# $(NAME): $(OBJ)
+	# $(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 # -C <path> option. This changes the current path to the path '<path>', -s silent
 LIBFT:

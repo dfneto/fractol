@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/28 15:50:31 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:37:16 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include <mlx.h>
 
 typedef struct	s_data {
 	void	*img;

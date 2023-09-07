@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/28 15:50:38 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:31:24 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "../deps/libft/libft.h"
+#include "ft_printf.h"
