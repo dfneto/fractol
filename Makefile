@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
+#    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/07 18:33:45 by david            ###   ########.fr        #
+#    Updated: 2023/09/13 19:49:32 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = fractol
 MAKE = make --no-print-directory
 HEADER = fractol.h
-SRC = src/fractol.c
+SRC = src/*.c
 DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
@@ -27,7 +27,7 @@ CFLAGS += -Wextra -Werror -Wall -g -I deps/mlx -I deps/ft_printf -I inc/
 OBJ = $(SRC:.c=.o)
 
 ################################# RULES ####################################### 
-all:
+all: 
 	$(MAKE) $(NAME)
 # This pattern rule tells make how to build a .o file from a corresponding .c file 
 # (and ensures that the object files are recompiled if the header file, indicated 
@@ -42,7 +42,7 @@ all:
 %.o : %.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) Makefile
 	$(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
 
 # -C <path> option. This changes the current path to the path '<path>', -s silent

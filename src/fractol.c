@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/06 18:37:16 by david            ###   ########.fr       */
+/*   Updated: 2023/09/13 19:38:14 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	close_window(int keycode, t_vars *vars)
 	return (0);
 }
 
+/*
 int	main(void)
 {
     // t_data	img;
@@ -58,7 +59,6 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 
-/*   	
 	img.img = mlx_new_image(mlx, 1920, 1080);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
@@ -70,8 +70,8 @@ int	main(void)
 		i++;
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-*/
+
 	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_mouse_hook(vars.win, mlx_destroy_window, &vars);
+	mlx_mouse_hook(vars.win, close_window, &vars);
 	mlx_loop(vars.mlx);
-}
+}*/
