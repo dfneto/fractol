@@ -6,7 +6,7 @@
 #    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/13 19:49:32 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/14 16:24:40 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = fractol
 MAKE = make --no-print-directory
 HEADER = fractol.h
-SRC = src/*.c
+SRC = src/fractol.c src/pulga.c
 DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
@@ -52,14 +52,7 @@ LIBFT:
 FTPRINTF:
 	@$(MAKE) -sC $(DIR_PRINTF)
 
-CLIENT: $(SRC_CLIENT)
-	$(CC) $(CFLAGS) $(SRC_CLIENT) $(LIBFT) $(PRINTF) -o client
-
-SERVER: $(SRC_SERVER)
-	$(CC) $(CFLAGS) $(SRC_SERVER) $(LIBFT) $(PRINTF) -o server
-
 clean:
-	rm -f *.out client server
 	rm -f *.out src/*.o
 	rm -rf *.dSYM
 	@$(MAKE) clean -C $(DIR_LIBFT)

@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/13 19:38:14 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:03:14 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,28 @@ int	close_window(int keycode, t_vars *vars)
 	return (0);
 }
 
-/*
-int	main(void)
-{
-    // t_data	img;
+// int	main(void)
+// {
+//     // t_data	img;
 
-	t_vars	vars;
+// 	t_vars	vars;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
+// 	vars.mlx = mlx_init();
+// 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 
-	img.img = mlx_new_image(mlx, 1920, 1080);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
+// 	// img.img = mlx_new_image(mlx, 1920, 1080);
+//     // img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+// 	// 							&img.endian);
     
-	int	i = 0;
-	while (i < 1000)
-	{
-		my_mlx_pixel_put(&img, i, 1080/2, 0x00FF0000);
-		i++;
-	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+// 	// int	i = 0;
+// 	// while (i < 1000)
+// 	// {
+// 	// 	my_mlx_pixel_put(&img, i, 1080/2, 0x00FF0000);
+// 	// 	i++;
+// 	// }
+// 	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_mouse_hook(vars.win, close_window, &vars);
-	mlx_loop(vars.mlx);
-}*/
+// 	mlx_key_hook(vars.win, key_hook, &vars);
+// 	mlx_mouse_hook(vars.win, close_window, &vars);
+// 	mlx_loop(vars.mlx);
+// }

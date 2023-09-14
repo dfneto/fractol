@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/13 19:59:30 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:09:31 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,13 @@ typedef struct s_win
 	int		height;
 	int		width;
 }		t_win;
+
+typedef struct s_img
+{
+	t_win	win;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		endian;
+	int		line_len;
+}		t_img;

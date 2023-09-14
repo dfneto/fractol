@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:09:39 by david             #+#    #+#             */
-/*   Updated: 2023/09/07 18:31:57 by david            ###   ########.fr       */
+/*   Updated: 2023/09/14 14:57:32 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 // gcc deps/ft_printf/libftprintf.a src/main.c && ./a.out
 // Em ambos casos eu compilei estando na raiz do projeto.
 
-int main(int argc, char *argv[])
-{
-    (void)argc;
-    (void)argv;
+// int main(int argc, char *argv[])
+// {
+//     (void)argc;
+//     (void)argv;
 
-    ft_printf("--------------------------\n");
-    ft_printf("SUCESSO DE MAKE PORRA!!!\n");
-    ft_printf("--------------------------\n");
-}
+//     ft_printf("--------------------------\n");
+//     ft_printf("SUCESSO DE MAKE PORRA!!!\n");
+//     ft_printf("--------------------------\n");
+// }
