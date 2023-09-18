@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 19:35:39 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/18 17:06:51 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:28:05 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_complex	convert_pixel_in_complex_number(int x, int y)
 {
 	t_complex	c;
 
-	c.x = ((float) x * 3.0 / 1920.0) - 2.0;
-	c.y = (((float)y * 2.0 / 1080.0) - 1.0);
+	c.x = (3 * (float)x) / 1920.0 + 2;
+	c.y = (2 * (float)y) / 1080.0 + 1;
 	return (c);
 }
 
