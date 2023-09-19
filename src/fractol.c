@@ -1,76 +1,93 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 15:50:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/14 16:03:14 by davifern         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fractol.h"
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
-int	key_hook(int keycode, t_vars *vars)
+/*
+* return 1: if the complex number (the pixel coordinates) belongs 
+* to the Mandelbrot set and do not escape to infinity
+* return i: if the complex number escape to infinity and i is like
+* how fast the number escapes.
+*/
+t_complex	convert_pixel_in_complex_number(int x, int y)
 {
-	(void) vars;
-	ft_printf("Hello from key_hook!\n");
-	ft_printf("The keycode: %d\n", keycode);
-	return (0);
+	t_complex	c;
+
+	// c.x = 3 * (float)x / 1920.0 - 2;
+	// c.y = ((2 * (float)y) / 1080.0 - 1);
+
+    c.x = (((float)x * 3.0 / 1920.0) - 2.0);
+	c.y = 1.0 - ((float)y * 2.0 / 1080.0);
+	return (c);
 }
 
-int	close_window(int keycode, t_vars *vars)
+int	calculate_mandelbrot(int x, int y)
 {
-	(void) vars;
-	ft_printf("Hello from MOUSE!\n");
-	ft_printf("The keycode: %d\n", keycode);
-	return (0);
+	int			i;
+	t_complex	c;
+	int			x0;
+	int			y0;
+	int			xtemp;
+	
+	c = convert_pixel_in_complex_number(x, y);
+	i = 0;
+	x0 = c.x;
+	y0 = c.y;
+	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < 500) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
+	{
+		xtemp = c.x * c.x - (c.y * c.y) + x0;
+		c.y = 2 * c.x * c.y + y0;
+		c.x = xtemp;
+		printf("%f %f\t%f\n", c.x, c.y, c.x * c.x + c.y * c.y);
+		i++;
+	}
+	printf("%d\n", i);
+	if (i == 500)
+		return (1);
+	else
+		return (0);
 }
 
-// int	main(void)
-// {
-//     // t_data	img;
+int	main(void)
+{
+    t_win	window;
+	t_img	image;
+    int     x;
+    int     y;
+    int     m;
 
-// 	t_vars	vars;
-
-// 	vars.mlx = mlx_init();
-// 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-
-// 	// img.img = mlx_new_image(mlx, 1920, 1080);
-//     // img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-// 	// 							&img.endian);
-    
-// 	// int	i = 0;
-// 	// while (i < 1000)
-// 	// {
-// 	// 	my_mlx_pixel_put(&img, i, 1080/2, 0x00FF0000);
-// 	// 	i++;
-// 	// }
-// 	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-
-// 	mlx_key_hook(vars.win, key_hook, &vars);
-// 	mlx_mouse_hook(vars.win, close_window, &vars);
-// 	mlx_loop(vars.mlx);
-// }
+	window.mlx_ptr = mlx_init();
+    if (!window.mlx_ptr)
+		return (1);
+	window.win_ptr = mlx_new_window(window.mlx_ptr, 1920, 1080, "Fractol");
+    if (!window.win_ptr)
+		return (2);
+	image.img_ptr = mlx_new_image(window.mlx_ptr, 1920, 1080);
+	image.addr = mlx_get_data_addr(image.img_ptr, &image.bpp, &image.line_len,
+								&image.endian);
+	x = 0;
+	y = 0;
+	while (y < 1080)
+	{
+		while (x < 1920)
+		{
+            m = calculate_mandelbrot(x, y);
+            if (m == 1) //se hace 100 iteraciones
+				my_mlx_pixel_put(&image, x, y, 0x00000000); //pinto negro
+			else //se salie antes porque el valor es major que 4
+				my_mlx_pixel_put(&image, x, y, 0x00FFFFFF); //pinto blanco
+			x++;
+		}
+		y++;
+		x = 0;
+	}
+	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, image.img_ptr, 0, 0);
+	mlx_loop(window.mlx_ptr);
+    return (0);
+}
