@@ -29,7 +29,11 @@ t_complex	convert_pixel_in_complex_number(int x, int y)
 	return (c);
 }
 
-int	calculate_mandelbrot(int x, int y)
+/*
+* It receives a pixel (x,y) e return the iteration that this pixel (converted into Mandelbrot space) escape to the infinity.
+* If return MAX_ITERATION that's because the pixel point didn't escape to the infinity
+*/
+int	get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(int x, int y)
 {
 	int			i;
 	t_complex	c;
@@ -41,18 +45,59 @@ int	calculate_mandelbrot(int x, int y)
 	i = 0;
 	x0 = c.x;
 	y0 = c.y;
-	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < 100) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
+	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < MAX_ITERATION) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
 	{
 		xtemp = c.x * c.x - (c.y * c.y) + x0;
 		c.y = 2 * c.x * c.y + y0;
 		c.x = xtemp;
 		i++;
 	}
-	
-	if (i == 100)
-		return (1);
-	else
-		return (0);
+	return (i);
+}
+
+int	define_color_2(int	i)
+{
+	if (i == 8)
+        return (BLUE_0);
+    else if (i == 9)
+        return (LIGHTEST_BLUE);
+    else if (i == 10)
+        return (LIGHTEST_YELLOW);
+    else if (i == 11)
+        return (LIGHT_YELLOW);
+    else if (i == 12)
+        return (DIRTY_YELLOW);
+    else if (i == 13)
+        return (BROWN_0);
+    else if (i == 14)
+        return (BROWN_1);
+    else
+        return (BROWN_2);
+}
+
+int	define_color(int number_of_iterations)
+{
+	int	i;
+
+	i = number_of_iterations % 16;
+	if (i == 0)
+        return (BROWN_3);
+    else if (i == 1)
+        return (DARK_VIOLET);
+    else if (i == 2)
+        return (DARKEST_BLUE);
+    else if (i == 3)
+        return (BLUE_5);
+    else if (i == 4)
+        return (BLUE_4);
+    else if (i == 5)
+        return (BLUE_3);
+    else if (i == 6)
+        return (BLUE_2);
+    else if (i == 7)
+        return (BLUE_1);
+    else 
+		return (define_color_2(i));
 }
 
 int	main(void)
@@ -61,7 +106,8 @@ int	main(void)
 	t_img	image;
     int     x;
     int     y;
-    int     m;
+    int     number_of_iterations;
+	int		color;
 
 	window.mlx_ptr = mlx_init();
     if (!window.mlx_ptr)
@@ -78,11 +124,9 @@ int	main(void)
 	{
 		while (x < 1920)
 		{
-            m = calculate_mandelbrot(x, y);
-            if (m == 1) //se hace 100 iteraciones
-				my_mlx_pixel_put(&image, x, y, 0x00000000); //pinto negro
-			else //se salie antes porque el valor es major que 4
-				my_mlx_pixel_put(&image, x, y, 0x00FFFFFF); //pinto blanco
+            number_of_iterations = get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(x, y);
+			color = define_color(number_of_iterations);
+			my_mlx_pixel_put(&image, x, y, color); 
 			x++;
 		}
 		y++;

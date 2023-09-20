@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/20 17:04:34 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:37:29 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,23 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
-# define WIDTH 1920
-# define HEIGHT 1080
+#define WIDTH 1920
+#define HEIGHT 1080
+#define MAX_ITERATION 500
 
-# define TURQUESA 	0X60FAD2
-# define LILA_CLAR	0XCD74FC
-# define LILA_MITJ	0XA236DC
-# define LILA_FOSC	0X7103AC
-# define ROSA		0XFC86C8
-# define VERD		0X8FD19D
-# define AZULCIELO	0X88CCF2
-# define AZULMARIN	0X07093B
-# define CORAL		0XFA535D
-# define NARANJA	0XFE834D
-# define BLANCOROTO	0XF2F2F2
-# define NEGRE		0X000000
+#define BROWN_3 0x421E0F
+#define DARK_VIOLET 0x19071A
+#define DARKEST_BLUE 0x09012F
+#define BLUE_5 0x040449
+#define BLUE_4 0x000764
+#define BLUE_3 0x0C2C8A
+#define BLUE_2 0x1852B1
+#define BLUE_1 0x397DD1
+#define BLUE_0 0x86B5E5
+#define LIGHTEST_BLUE 0xD3ECF8
+#define LIGHTEST_YELLOW 0xF1E9BF
+#define LIGHT_YELLOW 0xF8C95F
+#define DIRTY_YELLOW 0xFFAA00
+#define BROWN_0 0xCC8000
+#define BROWN_1 0x995700
+#define BROWN_2 0x6A3403
