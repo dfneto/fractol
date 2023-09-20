@@ -19,11 +19,13 @@ t_complex	convert_pixel_in_complex_number(int x, int y)
 {
 	t_complex	c;
 
+	// printf("%d %d\n", x, y);
 	// c.x = 3 * (float)x / 1920.0 - 2;
 	// c.y = ((2 * (float)y) / 1080.0 - 1);
 
     c.x = (((float)x * 3.0 / 1920.0) - 2.0);
 	c.y = 1.0 - ((float)y * 2.0 / 1080.0);
+	// printf("%f %f\n", c.x, c.y);
 	return (c);
 }
 
@@ -39,16 +41,17 @@ int	calculate_mandelbrot(int x, int y)
 	i = 0;
 	x0 = c.x;
 	y0 = c.y;
-	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < 500) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
+	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < 100) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
 	{
+		// printf("%f %f\n", c.x, c.y);
+		// printf("%f %f\t%f\n", c.x, c.y, c.x * c.x + c.y * c.y);
 		xtemp = c.x * c.x - (c.y * c.y) + x0;
 		c.y = 2 * c.x * c.y + y0;
 		c.x = xtemp;
-		printf("%f %f\t%f\n", c.x, c.y, c.x * c.x + c.y * c.y);
 		i++;
 	}
-	printf("%d\n", i);
-	if (i == 500)
+	// printf("%d\n", i);
+	if (i == 100)
 		return (1);
 	else
 		return (0);
