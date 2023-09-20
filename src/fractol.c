@@ -33,9 +33,9 @@ int	calculate_mandelbrot(int x, int y)
 {
 	int			i;
 	t_complex	c;
-	int			x0;
-	int			y0;
-	int			xtemp;
+	double			x0;
+	double			y0;
+	double			xtemp;
 	
 	c = convert_pixel_in_complex_number(x, y);
 	i = 0;
@@ -43,14 +43,12 @@ int	calculate_mandelbrot(int x, int y)
 	y0 = c.y;
 	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < 100) //pq 100? sei que com 100 ja da pra visualizar melhor o mandelbrot, mas quero entender melhor isso
 	{
-		// printf("%f %f\n", c.x, c.y);
-		// printf("%f %f\t%f\n", c.x, c.y, c.x * c.x + c.y * c.y);
 		xtemp = c.x * c.x - (c.y * c.y) + x0;
 		c.y = 2 * c.x * c.y + y0;
 		c.x = xtemp;
 		i++;
 	}
-	// printf("%d\n", i);
+	
 	if (i == 100)
 		return (1);
 	else
