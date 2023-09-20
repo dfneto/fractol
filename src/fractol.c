@@ -1,14 +1,5 @@
 #include "fractol.h"
 
-
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
 /*
 * return 1: if the complex number (the pixel coordinates) belongs 
 * to the Mandelbrot set and do not escape to infinity
@@ -19,13 +10,8 @@ t_complex	convert_pixel_in_complex_number(int x, int y)
 {
 	t_complex	c;
 
-	// printf("%d %d\n", x, y);
-	// c.x = 3 * (float)x / 1920.0 - 2;
-	// c.y = ((2 * (float)y) / 1080.0 - 1);
-
     c.x = (((float)x * 3.0 / 1920.0) - 2.0);
 	c.y = 1.0 - ((float)y * 2.0 / 1080.0);
-	// printf("%f %f\n", c.x, c.y);
 	return (c);
 }
 
@@ -55,49 +41,14 @@ int	get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(int x, int y)
 	return (i);
 }
 
-int	define_color_2(int	i)
+int	close_window(int keycode, t_win *window)
 {
-	if (i == 8)
-        return (BLUE_0);
-    else if (i == 9)
-        return (LIGHTEST_BLUE);
-    else if (i == 10)
-        return (LIGHTEST_YELLOW);
-    else if (i == 11)
-        return (LIGHT_YELLOW);
-    else if (i == 12)
-        return (DIRTY_YELLOW);
-    else if (i == 13)
-        return (BROWN_0);
-    else if (i == 14)
-        return (BROWN_1);
-    else
-        return (BROWN_2);
-}
-
-int	define_color(int number_of_iterations)
-{
-	int	i;
-
-	i = number_of_iterations % 16;
-	if (i == 0)
-        return (BROWN_3);
-    else if (i == 1)
-        return (DARK_VIOLET);
-    else if (i == 2)
-        return (DARKEST_BLUE);
-    else if (i == 3)
-        return (BLUE_5);
-    else if (i == 4)
-        return (BLUE_4);
-    else if (i == 5)
-        return (BLUE_3);
-    else if (i == 6)
-        return (BLUE_2);
-    else if (i == 7)
-        return (BLUE_1);
-    else 
-		return (define_color_2(i));
+	if ((keycode == ESC || keycode == LEFT_CLICK) && window)
+	{
+		mlx_destroy_window(window->mlx_ptr, window->win_ptr);
+		exit(1); //can i use it? and why 1?
+	}
+	return (0);
 }
 
 int	main(void)
@@ -132,6 +83,13 @@ int	main(void)
 		y++;
 		x = 0;
 	}
+	
+	// mlx_hook(window.win_ptr, 2, 1L<<0, mlx_destroy_window, &window);
+	mlx_hook(window.win_ptr, 2, 0, close_window, &window);
+	// mlx_hook(window.win_ptr, 4, 0, close_window, &window);
+	mlx_hook(window.win_ptr, 17, 0, close_window, &window);
+	//mlx_key_hook(window.win_ptr, close_window, &window);
+	//mlx_mouse_hook(window.win_ptr, close_window, &window);
 	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, image.img_ptr, 0, 0);
 	mlx_loop(window.mlx_ptr);
     return (0);

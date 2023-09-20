@@ -1,6 +1,7 @@
 .DS_Store
 server
 client
+fractol
 *.swp
 # Prerequisites
 *.d
