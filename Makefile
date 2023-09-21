@@ -6,7 +6,7 @@
 #    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/21 19:20:08 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/21 19:40:23 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = fractol
 MAKE = make --no-print-directory
 HEADER = inc/fractol.h
-SRC = src/fractol.c src/utils.c
+SRC = src/fractol.c src/utils.c src/hooks.c
 DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
@@ -45,7 +45,7 @@ all:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(HEADER) Makefile
-	$(CC) $(OBJ) -o3 -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
+	$(CC) $(OBJ) -O3 -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
 
 # -C <path> option. This changes the current path to the path '<path>', -s silent
 LIBFT:

@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 19:20:40 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:59:43 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 #ifndef FRACTOL_H 
 # define FRACTOL_H
 
-#include <mlx.h>
-#include "../deps/libft/libft.h"
-#include "ft_printf.h"
+# include <mlx.h>
+# include "../deps/libft/libft.h"
+# include "ft_printf.h"
 
-
-typedef struct s_win 
+typedef struct s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -46,9 +45,16 @@ typedef struct s_complex
 
 int		define_color(int number_of_iterations);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+int		scroll(int button, int x, int y, t_img *image);
+int		close_window(int keycode, t_win *window);
+int		close_window_mouse(t_win *window);
+void	plot_fractal(t_img *image);
 
 # define WIDTH 800
 # define HEIGHT 600
+/* TODO: entender porque com 100 iterações já
+* se visualiza bem o fractal
+*/
 # define MAX_ITERATION 100
 
 # define ESC 53
@@ -70,7 +76,5 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 # define BROWN_0 0xCC8000
 # define BROWN_1 0x995700
 # define BROWN_2 0x6A3403
-
-
 
 #endif
