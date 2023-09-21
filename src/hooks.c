@@ -6,10 +6,13 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:37:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 19:57:58 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:13:21 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* 
+* hook.c have functions related to the hooks
+*/
 #include "fractol.h"
 
 int	scroll(int button, int x, int y, t_img *image)

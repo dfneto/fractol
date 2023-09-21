@@ -5,25 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:09:39 by david             #+#    #+#             */
-/*   Updated: 2023/09/14 14:57:32 by davifern         ###   ########.fr       */
+/*   Created: 2023/09/21 22:08:12 by davifern          #+#    #+#             */
+/*   Updated: 2023/09/21 22:28:12 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-// Para eu usar o include sem o path, ou seja, ao invés de usar 
-// #include "../deps/ft_printf/ft_printf.h" eu tenho que compilar assim:
-// gcc -Ideps/ft_printf src/main.c -Ldeps/ft_printf -lftprintf && ./a.out
-// E se eu tenho #include "deps/ft_printf/ft_printf.h" eu compilo:
-// gcc deps/ft_printf/libftprintf.a src/main.c && ./a.out
-// Em ambos casos eu compilei estando na raiz do projeto.
 
-// int main(int argc, char *argv[])
-// {
-//     (void)argc;
-//     (void)argv;
+/*
+* 17 is the event DestroyNotify launched when we click the X 
+* button to close a window
+* 4 is the event ButtonPress launched when the mouse is clicked 
+* and scroll is a botton pressed
+* ----------------------------------------------------------------
+* mlx_mouse_hook(window.win_ptr, scroll, &window) is equivalent to
+* mlx_hook(window.win_ptr, 4, 0, scroll, &image);
+*/
+int	main(int argc, char *argv[])
+{
+	t_win	window;
+	t_img	image;
 
-//     ft_printf("--------------------------\n");
-//     ft_printf("SUCESSO DE MAKE PORRA!!!\n");
-//     ft_printf("--------------------------\n");
-// }
+    image.args = *argv;
+	image.fractal_type = 1;
+	if (argc >= 2)
+		image.fractal_type = 2;
+	window.mlx_ptr = mlx_init();
+	if (!window.mlx_ptr)
+		return (1);
+	window.win_ptr = mlx_new_window(window.mlx_ptr, WIDTH, HEIGHT, "Fractol");
+	if (!window.win_ptr)
+		return (2);
+	image.img_ptr = mlx_new_image(window.mlx_ptr, WIDTH, HEIGHT);
+	image.addr = mlx_get_data_addr(image.img_ptr, &image.bpp,
+			&image.line_len, &image.endian);
+	window.zoom = 1;
+	image.win = &window;
+	plot_fractal(&image);
+	mlx_hook(window.win_ptr, 17, 0, close_window_mouse, &window);
+	mlx_hook(window.win_ptr, 2, 0, close_window, &window);
+	mlx_hook(window.win_ptr, 4, 0, scroll, &image);
+	mlx_loop(window.mlx_ptr);
+	return (0);
+}

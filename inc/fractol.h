@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 19:59:43 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:25:19 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct s_img
 	t_win	*win;
 	void	*img_ptr;
 	char	*addr;
+	char	*args;
 	int		bpp;
 	int		endian;
 	int		line_len;
+	int		fractal_type;
 }		t_img;
 
 typedef struct s_complex
@@ -50,8 +52,8 @@ int		close_window(int keycode, t_win *window);
 int		close_window_mouse(t_win *window);
 void	plot_fractal(t_img *image);
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1080
+# define HEIGHT 720
 /* TODO: entender porque com 100 iterações já
 * se visualiza bem o fractal
 */

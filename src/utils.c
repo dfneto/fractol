@@ -6,9 +6,14 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:40:49 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 19:55:57 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:35:43 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* 
+* utils_plot.c have functions related to put pixel in the window and 
+* with colors
+*/
 
 #include "fractol.h"
 

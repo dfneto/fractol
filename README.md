@@ -12,9 +12,10 @@ Para funcionar vc deve ter o libmlx.a dentro de deps/mlx que vc gera ao rodar ma
 
 
 
-Draw pixels on an image
-💡 Don’t use mlx_pixel_put like I did at first.
+#Mandelbrot
+make && ./fractol  
 
-It’s slow and you can’t re-render the canvas.
-
-Use mlx_put_image_to_window instead.
+#Julia
+make && ./fractol  2 -1.17918 -0.02032
+2 means julia fractal
+The others 2 numbers you can vary. Take examples at https://complex-analysis.com/contenido/conjunto_de_julia.html
