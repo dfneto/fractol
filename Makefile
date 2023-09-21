@@ -6,7 +6,7 @@
 #    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/20 17:50:40 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/21 19:20:08 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ all:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(HEADER) Makefile
-	$(CC) $(OBJ) -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
+	$(CC) $(OBJ) -o3 -Ldeps/mlx -lmlx -framework OpenGL -framework AppKit -Ldeps/ft_printf -lftprintf -o $(NAME)
 
 # -C <path> option. This changes the current path to the path '<path>', -s silent
 LIBFT:

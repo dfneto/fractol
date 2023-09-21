@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/20 18:15:07 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:20:40 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ typedef struct s_win
 	void	*win_ptr;
 	int		height;
 	int		width;
+	double	zoom;
 }		t_win;
 
 typedef struct s_img
 {
-	t_win	win;
+	t_win	*win;
 	void	*img_ptr;
 	char	*addr;
 	int		bpp;
@@ -43,12 +44,12 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
-int	define_color(int number_of_iterations);
+int		define_color(int number_of_iterations);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-# define WIDTH 1920
-# define HEIGHT 1080
-# define MAX_ITERATION 500
+# define WIDTH 800
+# define HEIGHT 600
+# define MAX_ITERATION 100
 
 # define ESC 53
 # define LEFT_CLICK 1

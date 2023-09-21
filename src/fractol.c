@@ -12,8 +12,8 @@ t_complex	convert_pixel_in_complex_number(int x, int y, double zoom)
 
     // c.x = (((float)x * 3.0 / 1920.0) - 2.0);
 	// c.y = 1.0 - ((float)y * 2.0 / 1080.0);
-	c.x = (((float)x * 3.0 / 1920.0) - 2.0) / zoom;
-	c.y = (((float)y * 2.0 / 1080.0) - 1.0) / zoom;
+	c.x = (((float)x * 3.0 / WIDTH) - 2.0) / zoom;
+	c.y = (((float)y * 2.0 / HEIGHT) - 1.0) / zoom;
 	return (c);
 }
 
@@ -21,7 +21,7 @@ t_complex	convert_pixel_in_complex_number(int x, int y, double zoom)
 * It receives a pixel (x,y) e return the iteration that this pixel (converted into Mandelbrot space) escape to the infinity.
 * If return MAX_ITERATION that's because the pixel point didn't escape to the infinity
 */
-int	get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(int x, int y, int zoom)
+int	get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(int x, int y, double zoom)
 {
 	int			i;
 	t_complex	c;
@@ -65,7 +65,7 @@ int	close_window_mouse(t_win *window)
 	return (0);
 }
 
-void	plot_fractal(t_img *image, int zoom)
+void	plot_fractal(t_img *image)
 {
 	int     x;
     int     y;
@@ -78,7 +78,7 @@ void	plot_fractal(t_img *image, int zoom)
 	{
 		while (x < WIDTH)
 		{
-            number_of_iterations = get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(x, y, zoom);
+            number_of_iterations = get_num_of_iteration_when_pixel_escape_in_mandelbrot_set(x, y, image->win->zoom);
 			color = define_color(number_of_iterations);
 			my_mlx_pixel_put(image, x, y, color); 
 			x++;
@@ -86,19 +86,16 @@ void	plot_fractal(t_img *image, int zoom)
 		y++;
 		x = 0;
 	}
-	// mlx_put_image_to_window((*image).win.mlx_ptr, (*image).win.win_ptr, (*image).img_ptr, 0, 0);
-	// mlx_put_image_to_window(image->win.mlx_ptr, image->win.win_ptr, image->img_ptr, 0, 0);
+	mlx_put_image_to_window((*image).win->mlx_ptr, (*image).win->win_ptr, image->img_ptr, 0, 0);
 }
 
-int	scroll(int button, int x, int y, void *image)
+int	scroll(int button, int x, int y, t_img *image)
 {
-	int	zoom;
-
-	zoom = 0;
 	if (button == 5)
-		plot_fractal(image, 2);
+		image->win->zoom *= 1.5;
 	if (button == 4)
-		plot_fractal(image, 2);
+		image->win->zoom /= 1.5;
+	plot_fractal(image);
 	(void) x;
 	(void) y;
 	return (0);
@@ -112,22 +109,24 @@ int	main(void)
 	window.mlx_ptr = mlx_init();
     if (!window.mlx_ptr)
 		return (1);
-	window.win_ptr = mlx_new_window(window.mlx_ptr, 1920, 1080, "Fractol");
+	window.win_ptr = mlx_new_window(window.mlx_ptr, WIDTH, HEIGHT, "Fractol");
     if (!window.win_ptr)
 		return (2);
-	image.img_ptr = mlx_new_image(window.mlx_ptr, 1920, 1080);
+	image.img_ptr = mlx_new_image(window.mlx_ptr, WIDTH, HEIGHT);
 	image.addr = mlx_get_data_addr(image.img_ptr, &image.bpp, &image.line_len,
 								&image.endian);
-	// image.win = &window;
+	window.zoom = 1;
+	image.win = &window;
 
-	plot_fractal(&image, 1);
-	
+	plot_fractal(&image);
+
 	/*sinal 17 eh um sinal que o sistema enviia quando destrói, no caso quando fechamos a janela*/
 	mlx_hook(window.win_ptr, 17, 0, close_window_mouse, &window);
 	mlx_hook(window.win_ptr, 2, 0, close_window, &window);
 	mlx_hook(window.win_ptr, 4, 0, scroll, &image); // mlx_mouse_hook(window.win_ptr, scroll, &window); sao equivalentes //4 eh o evento ButtonPress e o scroll é um botão pressionado
 	
-	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, image.img_ptr, 0, 0);
+	// mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, image.img_ptr, 0, 0);
+	// mlx_loop_hook (void *mlx_ptr, int (*funct_ptr)(), void *param);
 	mlx_loop(window.mlx_ptr);
     return (0);
 }
