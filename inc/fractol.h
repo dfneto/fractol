@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 22:25:19 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:16:59 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ typedef struct s_win
 	double	zoom;
 }		t_win;
 
+
+/*
+re and im are used just in case of julia set*/
 typedef struct s_img
 {
 	t_win	*win;
 	void	*img_ptr;
 	char	*addr;
-	char	*args;
+	float	im;
+	float	re;
 	int		bpp;
 	int		endian;
 	int		line_len;
@@ -51,7 +55,7 @@ int		scroll(int button, int x, int y, t_img *image);
 int		close_window(int keycode, t_win *window);
 int		close_window_mouse(t_win *window);
 void	plot_fractal(t_img *image);
-
+float	ft_atof(const char *str);
 # define WIDTH 1080
 # define HEIGHT 720
 /* TODO: entender porque com 100 iterações já

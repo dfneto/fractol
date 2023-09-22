@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 22:08:12 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 22:28:12 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:36:35 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ int	main(int argc, char *argv[])
 	t_win	window;
 	t_img	image;
 
-    image.args = *argv;
 	image.fractal_type = 1;
 	if (argc >= 2)
+	{
+		image.re = ft_atof(argv[2]);
+		image.im = ft_atof(argv[3]);
 		image.fractal_type = 2;
+	}
 	window.mlx_ptr = mlx_init();
 	if (!window.mlx_ptr)
 		return (1);

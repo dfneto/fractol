@@ -6,7 +6,7 @@
 #    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/21 22:52:16 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/22 17:31:36 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = fractol
 MAKE = make --no-print-directory
 HEADER = inc/fractol.h
-SRC = src/fractals.c src/utils.c src/hooks.c src/main.c src/ft_atod.c
+SRC = src/fractals.c src/utils.c src/hooks.c src/main.c src/ft_atof.c
 DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/

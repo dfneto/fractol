@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:31:19 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 22:35:54 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:35:28 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ int	get_iteration_mandelbrot(int x, int y, double zoom)
 	return (i);
 }
 
-int	get_iteration_julia(int x, int y, double zoom, char *x0, char *y0)
+int	get_iteration_julia(int x, int y, double zoom, t_img image)
 {
 	int			i;
 	t_complex	c;
-	double		x0;
-	double		y0;
+	float		x0;
+	float		y0;
 	double		xtemp;
 
 	c = convert_pixel_in_complex_number(x, y, 2, zoom);
 	i = 0;
-	x0 = -1.17918;
-	y0 = -0.02032;
+	x0 = image.re;
+	y0 = image.im;
 	while ((c.x * c.x + c.y * c.y <= 2 * 2) && i < MAX_ITERATION)
 	{
 		xtemp = c.x * c.x - (c.y * c.y) + x0;
@@ -102,8 +102,7 @@ void	plot_fractal(t_img *image)
 		while (x < WIDTH)
 		{
 			if (image->fractal_type == 2)
-				num_iteration = get_iteration_julia(x, y, image->win->zoom,
-						image->args[2], image->args[3]);
+				num_iteration = get_iteration_julia(x, y, image->win->zoom, *image);
 			else
 				num_iteration = get_iteration_mandelbrot(x,
 						y, image->win->zoom);
