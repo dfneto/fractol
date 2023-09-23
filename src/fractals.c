@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:31:19 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/22 17:35:28 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:03:42 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	plot_fractal(t_img *image)
 		while (x < WIDTH)
 		{
 			if (image->fractal_type == 2)
-				num_iteration = get_iteration_julia(x, y, image->win->zoom, *image);
+				num_iteration = get_iteration_julia(x, y,
+						image->win->zoom, *image);
 			else
 				num_iteration = get_iteration_mandelbrot(x,
 						y, image->win->zoom);

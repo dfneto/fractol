@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:37:30 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 22:13:21 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:03:16 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ int	close_window_mouse(t_win *window)
 		exit(0);
 	}
 	return (0);
+}
+
+void	set_hooks(t_win *window, t_img *image)
+{
+	mlx_hook(window->win_ptr, 17, 0, close_window_mouse, window);
+	mlx_hook(window->win_ptr, 2, 0, close_window, window);
+	mlx_hook(window->win_ptr, 4, 0, scroll, image);
+	mlx_loop(window->mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 22:08:12 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/22 17:36:35 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:02:00 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int	main(int argc, char *argv[])
 	window.zoom = 1;
 	image.win = &window;
 	plot_fractal(&image);
-	mlx_hook(window.win_ptr, 17, 0, close_window_mouse, &window);
-	mlx_hook(window.win_ptr, 2, 0, close_window, &window);
-	mlx_hook(window.win_ptr, 4, 0, scroll, &image);
-	mlx_loop(window.mlx_ptr);
+	set_hooks(&window, &image);
 	return (0);
 }

@@ -5,7 +5,6 @@ fractol
 *.swp
 # Prerequisites
 *.d
-.vscode/
 
 # Object files
 *.o

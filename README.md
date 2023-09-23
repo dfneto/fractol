@@ -16,6 +16,6 @@ Para funcionar vc deve ter o libmlx.a dentro de deps/mlx que vc gera ao rodar ma
 make && ./fractol  
 
 #Julia
-make && ./fractol  2 -1.17918 -0.02032
+make && ./fractol 2 -1.17918 -0.02032
 2 means julia fractal
 The others 2 numbers you can vary. Take examples at https://complex-analysis.com/contenido/conjunto_de_julia.html
