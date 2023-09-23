@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 22:08:12 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/23 13:02:00 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:35:19 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,68 @@
 * mlx_mouse_hook(window.win_ptr, scroll, &window) is equivalent to
 * mlx_hook(window.win_ptr, 4, 0, scroll, &image);
 */
+
+int	check_numbers(char *argv[])
+{
+	int	i;
+	int	idx;
+	int	check;
+
+	idx = 2;
+	while (argv[idx] != NULL)
+	{
+		i = -1;
+		check = 0;
+		if (argv[idx][0] == '-' || argv[idx][0] == '+')
+			i++;
+		while (argv[idx][++i])
+		{
+			if (argv[idx][i] == '.')
+				check++;
+			if ((argv[idx][i] != '.' && !ft_isdigit(argv[idx][i]))
+				|| check == 2)
+				return (1);
+		}
+		idx++;
+	}
+	return (0);
+}
+
+int	has_args_error(t_img *image, int argc, char *argv[])
+{
+	if (argc == 1 || argc > 4 || (ft_strncmp(argv[1], "1", 2) == 0
+			&& argv[2] != NULL) || (ft_strncmp(argv[1], "2", 2) == 0
+			&& argv[2] != NULL && argv[3] == NULL) || (argv[2] != NULL
+			&& argv[3] != NULL && check_numbers(argv)))
+	{
+		ft_printf("\t1 - to Mandelbrot\n\t2 - to Julia -> "
+			"Ex: ./fractol 2 param1 param2 (both optional)\n");
+		return (1);
+	}
+	if (ft_strncmp(argv[1], "1", 2) == 0)
+		image->fractal_type = 1;
+	else if (ft_strncmp(argv[1], "2", 2) == 0 && argv[2] == NULL)
+	{
+		image->re = 0.285;
+		image->im = -0.01;
+		image->fractal_type = 2;
+	}
+	else
+	{
+		image->re = ft_atof(argv[2]);
+		image->im = ft_atof(argv[3]);
+		image->fractal_type = 2;
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_win	window;
 	t_img	image;
 
-	image.fractal_type = 1;
-	if (argc >= 2)
-	{
-		image.re = ft_atof(argv[2]);
-		image.im = ft_atof(argv[3]);
-		image.fractal_type = 2;
-	}
+	if (has_args_error(&image, argc, argv))
+		return (0);
 	window.mlx_ptr = mlx_init();
 	if (!window.mlx_ptr)
 		return (1);

@@ -6,11 +6,10 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:50:36 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/23 13:01:30 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:34:29 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//do i need it???
 #ifndef FRACTOL_H 
 # define FRACTOL_H
 
@@ -27,20 +26,23 @@ typedef struct s_win
 	double	zoom;
 }		t_win;
 
-
 /*
-re and im are used just in case of julia set*/
+* *win: was necessary because in get_iteration_julia I
+* could not pass more than 4 parameters
+* re and im: are used just in case of julia set
+* fractal_type: necesary to set in case of julia set
+*/
 typedef struct s_img
 {
 	t_win	*win;
-	void	*img_ptr;
-	char	*addr;
 	float	im;
 	float	re;
+	int		fractal_type;
+	void	*img_ptr;
+	char	*addr;
 	int		bpp;
 	int		endian;
 	int		line_len;
-	int		fractal_type;
 }		t_img;
 
 typedef struct s_complex
@@ -57,8 +59,10 @@ int		close_window_mouse(t_win *window);
 void	plot_fractal(t_img *image);
 float	ft_atof(const char *str);
 void	set_hooks(t_win *window, t_img *image);
+
 # define WIDTH 1080
 # define HEIGHT 720
+
 /* TODO: entender porque com 100 iterações já
 * se visualiza bem o fractal
 */

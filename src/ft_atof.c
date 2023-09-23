@@ -6,17 +6,24 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 22:36:12 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/22 17:07:57 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:31:36 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "fractol.h"
+#include "fractol.h"
 
 int	is_negative(char a)
 {
 	if (a == '-')
 		return (-1);
 	return (1);
+}
+
+int	has_positive_signal(char a)
+{
+	if (a == '+')
+		return (1);
+	return (0);
 }
 
 float	ft_atof(const char *str)
@@ -28,7 +35,7 @@ float	ft_atof(const char *str)
 	result = 0;
 	i = 0;
 	numbers_after_comma = 0;
-	if (is_negative(str[i]) == -1)
+	if (is_negative(str[i]) == -1 || has_positive_signal(str[i]))
 		i++;
 	while ((str[i] >= 48 && str[i] <= 57) || str[i] == '.')
 	{
