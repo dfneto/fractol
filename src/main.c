@@ -6,11 +6,14 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 22:08:12 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/23 14:35:19 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:42:19 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+#define RULES "\t1 - to Mandelbrot\n\t2 - to Julia -> "
+#define EXAMPLE "Ex: ./fractol 2 param1 param2 (both optional)\n"
 
 /*
 * 17 is the event DestroyNotify launched when we click the X 
@@ -50,13 +53,14 @@ int	check_numbers(char *argv[])
 
 int	has_args_error(t_img *image, int argc, char *argv[])
 {
-	if (argc == 1 || argc > 4 || (ft_strncmp(argv[1], "1", 2) == 0
-			&& argv[2] != NULL) || (ft_strncmp(argv[1], "2", 2) == 0
-			&& argv[2] != NULL && argv[3] == NULL) || (argv[2] != NULL
-			&& argv[3] != NULL && check_numbers(argv)))
+	if (
+		(argc != 2 && argc != 4) || (ft_strncmp(argv[1], "1", 2) != 0
+			&& ft_strncmp(argv[1], "2", 2) != 0)
+		|| (ft_strncmp(argv[1], "1", 2) == 0 && argc != 2)
+		|| (ft_strncmp(argv[1], "2", 2) == 0 && argc == 4
+			&& check_numbers(argv)))
 	{
-		ft_printf("\t1 - to Mandelbrot\n\t2 - to Julia -> "
-			"Ex: ./fractol 2 param1 param2 (both optional)\n");
+		ft_printf("%s %s", RULES, EXAMPLE);
 		return (1);
 	}
 	if (ft_strncmp(argv[1], "1", 2) == 0)

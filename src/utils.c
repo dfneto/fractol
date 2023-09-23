@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:40:49 by davifern          #+#    #+#             */
-/*   Updated: 2023/09/21 22:35:43 by davifern         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:41:57 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ int	define_color(int number_of_iterations)
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
+	int		new_x;
 
-	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	new_x = x;
+	if (data->fractal_type == 2)
+		new_x = WIDTH - x;
+	dst = data->addr + (y * data->line_len + new_x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
