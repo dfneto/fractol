@@ -6,7 +6,7 @@
 #    By: davifern <davifern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:18:58 by davifern          #+#    #+#              #
-#    Updated: 2023/09/23 14:40:31 by davifern         ###   ########.fr        #
+#    Updated: 2023/09/23 14:46:25 by davifern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DIR_LIBFT = ./deps/libft/
 LIBFT = $(DIR_LIBFT)/libft.a
 DIR_PRINTF = ./deps/ft_printf/
 PRINTF = $(DIR_PRINTF)/libftprintf.a
+DIR_MLX = ./deps/mlx/
 CC = gcc
 CFLAGS += -Wextra -Werror -Wall -MMD -g -I deps/mlx -I deps/ft_printf -I inc
 
@@ -55,10 +56,13 @@ clean:
 	rm -rf *.dSYM
 	@$(MAKE) clean -C $(DIR_LIBFT)
 	@$(MAKE) clean -C $(DIR_PRINTF)
+	@$(MAKE) clean -C $(DIR_MLX)
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f *.gch
+	@$(MAKE) fclean -C $(DIR_LIBFT)
+	@$(MAKE) fclean -C $(DIR_PRINTF)
 
 re: fclean all
 
