@@ -35,11 +35,8 @@ all:
 	$(MAKE) -sC $(DIR_LIBFT)
 	$(MAKE) -sC deps/mlx
 	$(MAKE) $(NAME)
-# This pattern rule tells make how to build a .o file from a corresponding .c file 
-# (and ensures that the object files are recompiled if the header file, indicated 
-# by $(HEADER), changes). It specifies that the command $(CC) $(CFLAGS) -c $< -o $@ 
-# should be used to compile each .c file into a corresponding .o file.
-# This is a pattern rule that specifies how to build an object file (.o) from a 
+
+# This is a pattern rule that specifies to make how to build an object file (.o) from a 
 # corresponding source file (.c). It also depends on the $(HEADER) file, meaning the
 # object files will be recompiled if the header file changes.
 # $(CC) $(CFLAGS) -c $< -o $@: This is the command that actually compiles each .c 
